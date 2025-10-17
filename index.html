@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>string - Captcha Demo</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 2rem; }
+      #captcha { max-width: 400px; display: block; margin: 1rem 0; }
+      #solution { font-weight: 600; padding: .5rem 0; }
+    </style>
+  </head>
+  <body>
+    <h1 id="title">string demo</h1>
+    <img id="captcha" alt="captcha"/>
+    <div id="solution">(not solved - demo)</div>
+
+    <script>
+      function getParam(n) {
+        return new URLSearchParams(window.location.search).get(n);
+      }
+      const url = getParam('url');
+      if (url) document.getElementById('captcha').src = url;
+
+      // demo solver: set fake solution after 800ms once the image loads
+      const img = document.getElementById('captcha');
+      img.addEventListener('load', () => {
+        setTimeout(() => {
+          document.getElementById('solution').textContent = 'SAMPLE-SOLUTION';
+        }, 800);
+      });
+    </script>
+  </body>
+</html>
